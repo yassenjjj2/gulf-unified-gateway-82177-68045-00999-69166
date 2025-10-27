@@ -3,6 +3,12 @@
   command = "npm run build"
 
 [[redirects]]
+  from = "/r/*"
+  to = "/meta.html"
+  status = 200
+  headers = {X-Robots-Tag = "noindex"}
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200

@@ -1,3 +1,4 @@
+import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -49,6 +50,15 @@ const Microsite = () => {
   const serviceName = payload.service_name || payload.chalet_name;
   const serviceKey = payload.service_key || 'aramex';
   const serviceBranding = getServiceBranding(serviceKey);
+  
+  // Update URL to include service information for better SEO
+  React.useEffect(() => {
+    const currentUrl = new URL(window.location.href);
+    if (isShipping && serviceKey && !currentUrl.searchParams.has('service')) {
+      currentUrl.searchParams.set('service', serviceKey);
+      window.history.replaceState({}, '', currentUrl.toString());
+    }
+  }, [isShipping, serviceKey]);
   
   // Get service description from gccShippingServices
   const allServices = Object.values(gccShippingServices).flat();
