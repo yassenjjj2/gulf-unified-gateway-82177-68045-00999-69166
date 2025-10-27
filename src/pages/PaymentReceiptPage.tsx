@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { getServiceBranding } from "@/lib/serviceLogos";
+import PaymentMetaTags from "@/components/PaymentMetaTags";
 import { CheckCircle2, Download, Home, Share2 } from "lucide-react";
 
 const PaymentReceiptPage = () => {
@@ -16,13 +17,20 @@ const PaymentReceiptPage = () => {
   const receiptId = `GF-${Math.random().toString(36).substring(2, 10).toUpperCase()}`;
   
   return (
-    <div 
-      className="min-h-screen py-12" 
-      dir="rtl"
-      style={{
-        background: `linear-gradient(135deg, ${branding.colors.primary}15, ${branding.colors.secondary}15)`
-      }}
-    >
+    <>
+      <PaymentMetaTags 
+        serviceName={serviceName}
+        amount={customerInfo.amount || "500 ر.س"}
+        title={`إيصال الدفع - ${serviceName}`}
+        description={`تم الدفع بنجاح لخدمة ${serviceName}`}
+      />
+      <div 
+        className="min-h-screen py-12" 
+        dir="rtl"
+        style={{
+          background: `linear-gradient(135deg, ${branding.colors.primary}15, ${branding.colors.secondary}15)`
+        }}
+      >
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto">
           {/* Service Logo */}
@@ -117,7 +125,7 @@ const PaymentReceiptPage = () => {
               >
                 <span className="text-lg font-bold">المبلغ المدفوع</span>
                 <span className="text-2xl font-bold" style={{ color: branding.colors.primary }}>
-                  500 ر.س
+                  {customerInfo.amount || "500 ر.س"}
                 </span>
               </div>
             </div>
@@ -153,7 +161,7 @@ const PaymentReceiptPage = () => {
           </Card>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
