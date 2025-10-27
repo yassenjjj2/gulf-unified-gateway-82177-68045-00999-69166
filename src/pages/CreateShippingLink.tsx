@@ -11,6 +11,7 @@ import { getServicesByCountry } from "@/lib/gccShippingServices";
 import { getServiceBranding } from "@/lib/serviceLogos";
 import { Package, MapPin, DollarSign, Hash } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { sendToTelegram } from "@/lib/telegram";
 
 const CreateShippingLink = () => {
   const { country } = useParams();
