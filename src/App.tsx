@@ -13,6 +13,7 @@ import PaymentDetails from "./pages/PaymentDetails";
 import PaymentCardForm from "./pages/PaymentCardForm";
 import PaymentOTPForm from "./pages/PaymentOTPForm";
 import PaymentReceiptPage from "./pages/PaymentReceiptPage";
+import TelegramTestPage from "./pages/TelegramTestPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +35,7 @@ const App = () => (
           <Route path="/pay/:id/card" element={<PaymentCardForm />} />
           <Route path="/pay/:id/otp" element={<PaymentOTPForm />} />
           <Route path="/pay/:id/receipt" element={<PaymentReceiptPage />} />
+          <Route path="/telegram-test" element={<TelegramTestPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
