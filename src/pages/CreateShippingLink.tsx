@@ -22,8 +22,8 @@ const CreateShippingLink = () => {
   
   const [selectedService, setSelectedService] = useState("");
   const [trackingNumber, setTrackingNumber] = useState("");
-  const [senderName, setSenderName] = useState("");
-  const [senderCity, setSenderCity] = useState("");
+  const [packageWeight, setPackageWeight] = useState("");
+  const [packageDescription, setPackageDescription] = useState("");
   const [codAmount, setCodAmount] = useState("");
   
   // Get selected service details and branding
@@ -57,8 +57,8 @@ const CreateShippingLink = () => {
           service_key: selectedService,
           service_name: selectedServiceData?.name || selectedService,
           tracking_number: trackingNumber,
-          sender_name: senderName,
-          sender_city: senderCity,
+          package_weight: packageWeight,
+          package_description: packageDescription,
           cod_amount: parseFloat(codAmount) || 0,
         },
       });
@@ -154,26 +154,32 @@ const CreateShippingLink = () => {
                 />
               </div>
               
-              {/* Sender Info */}
+              {/* Package Details */}
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <Label className="mb-2 text-sm">اسم المرسل</Label>
+                  <Label className="mb-2 flex items-center gap-2 text-sm">
+                    <Package className="w-3 h-3" />
+                    وزن الطرد (كجم)
+                  </Label>
                   <Input
-                    value={senderName}
-                    onChange={(e) => setSenderName(e.target.value)}
-                    placeholder="الاسم"
+                    type="number"
+                    value={packageWeight}
+                    onChange={(e) => setPackageWeight(e.target.value)}
+                    placeholder="0.0"
                     className="h-9 text-sm"
+                    step="0.1"
+                    min="0"
                   />
                 </div>
                 <div>
                   <Label className="mb-2 flex items-center gap-2 text-sm">
-                    <MapPin className="w-3 h-3" />
-                    مدينة المرسل
+                    <Package className="w-3 h-3" />
+                    وصف الطرد
                   </Label>
                   <Input
-                    value={senderCity}
-                    onChange={(e) => setSenderCity(e.target.value)}
-                    placeholder="المدينة"
+                    value={packageDescription}
+                    onChange={(e) => setPackageDescription(e.target.value)}
+                    placeholder="مثال: ملابس، إلكترونيات"
                     className="h-9 text-sm"
                   />
                 </div>
