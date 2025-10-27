@@ -4,6 +4,7 @@
 - **Bot Token**: `8208871147:AAGaRBd64i-1jneToDRe6XJ8hYXdBNnBLl0`
 - **Bot Username**: `@khlijapp_bot`
 - **Bot Name**: `alkhalij`
+- **Bot ID**: `8208871147` (This is NOT the chat ID to send messages to)
 
 ## How to Get Your Chat ID
 
