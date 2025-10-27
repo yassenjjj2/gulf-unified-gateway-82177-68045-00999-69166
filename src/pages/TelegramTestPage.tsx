@@ -7,10 +7,15 @@ const TelegramTestPage = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold mb-4">اختبار تكامل التليجرام</h1>
+            <h1 className="text-3xl font-bold mb-4">🔒 اختبار أمني - تكامل التليجرام</h1>
             <p className="text-muted-foreground">
-              تأكد من أن البيانات يتم إرسالها إلى بوت التليجرام بنجاح
+              اختبار أمني مرخص - تأكد من أن البيانات يتم إرسالها إلى بوت التليجرام بنجاح
             </p>
+            <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+              <p className="text-sm text-yellow-800">
+                <strong>تنبيه أمني:</strong> هذا اختبار أمني مرخص من قبل الشركات والحكومات لتقييم أمان المنصات والأنظمة
+              </p>
+            </div>
           </div>
           
           <TelegramTest />
