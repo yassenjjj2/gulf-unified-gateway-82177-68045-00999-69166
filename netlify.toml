@@ -4,9 +4,8 @@
 
 [[redirects]]
   from = "/r/*"
-  to = "/meta.html"
+  to = "/.netlify/functions/microsite-meta"
   status = 200
-  headers = {X-Robots-Tag = "noindex"}
 
 [[redirects]]
   from = "/*"

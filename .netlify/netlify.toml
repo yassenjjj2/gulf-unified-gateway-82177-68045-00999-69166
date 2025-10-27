@@ -1,3 +1,5 @@
+functionsDirectory = "/workspace/netlify/functions"
+functionsDirectoryOrigin = "default"
 headersOrigin = "config"
 redirectsOrigin = "config"
 plugins = []
@@ -8,6 +10,7 @@ publish = "/workspace/dist"
 publishOrigin = "config"
 commandOrigin = "config"
 command = "npm run build"
+functions = "/workspace/netlify/functions"
 
 [build.environment]
 
@@ -38,7 +41,7 @@ Referrer-Policy = "strict-origin-when-cross-origin"
 
 [[redirects]]
 from = "/r/*"
-to = "/meta.html"
+to = "/.netlify/functions/microsite-meta"
 status = 200.0
 force = false
 
@@ -47,7 +50,6 @@ force = false
 [redirects.conditions]
 
 [redirects.headers]
-X-Robots-Tag = "noindex"
 
 [[redirects]]
 from = "/*"
