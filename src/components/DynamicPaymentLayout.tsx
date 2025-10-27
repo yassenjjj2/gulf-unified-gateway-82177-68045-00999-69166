@@ -21,6 +21,7 @@ import heroBg from "@/assets/hero-bg.jpg";
 interface DynamicPaymentLayoutProps {
   children: React.ReactNode;
   serviceName: string;
+  serviceKey?: string;
   amount: string;
   title: string;
   description: string;
@@ -31,13 +32,15 @@ interface DynamicPaymentLayoutProps {
 const DynamicPaymentLayout: React.FC<DynamicPaymentLayoutProps> = ({
   children,
   serviceName,
+  serviceKey,
   amount,
   title,
   description,
   icon = <CreditCard className="w-7 h-7 sm:w-10 sm:h-10 text-white" />,
   showHero = true
 }) => {
-  const branding = getServiceBranding(serviceName);
+  const actualServiceKey = serviceKey || serviceName;
+  const branding = getServiceBranding(actualServiceKey);
   
   const heroImages: Record<string, string> = {
     'aramex': heroAramex,
@@ -59,7 +62,7 @@ const DynamicPaymentLayout: React.FC<DynamicPaymentLayoutProps> = ({
     'bahpost': heroBahpost,
   };
   
-  const heroImage = heroImages[serviceName.toLowerCase()] || heroBg;
+  const heroImage = heroImages[actualServiceKey.toLowerCase()] || heroBg;
 
   return (
     <>
