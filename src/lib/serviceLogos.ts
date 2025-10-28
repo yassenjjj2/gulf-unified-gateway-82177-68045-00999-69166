@@ -190,6 +190,9 @@ export const getServiceBranding = (serviceName: string) => {
     colors: {
       primary: "#0EA5E9",
       secondary: "#06B6D4"
-    }
+    },
+    ogImage: "/og-aramex.jpg",
+    heroImage: "/og-aramex.jpg",
+    description: "خدمة شحن موثوقة"
   };
 };

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Specific Link - nfp_8cxH5fVQz22FxSJvkdfHJCbp12mGKxuJ6e44</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-case {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-link {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 15px 25px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 10px 5px;
+            font-size: 16px;
+        }
+        .test-link:hover {
+            background: #0056b3;
+        }
+        .meta-preview {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border-left: 4px solid #007bff;
+        }
+        .meta-preview h4 {
+            margin-top: 0;
+            color: #495057;
+        }
+        .meta-preview p {
+            margin: 5px 0;
+            color: #6c757d;
+        }
+        .debug-info {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Specific Link Sharing</h1>
+    <p>Testing meta tag generation for link ID: <strong>nfp_8cxH5fVQz22FxSJvkdfHJCbp12mGKxuJ6e44</strong></p>
+
+    <div class="test-case">
+        <h3>Test Different Route Types</h3>
+        <p>Click these links to test meta tag generation for different route patterns:</p>
+        
+        <!-- Test microsite routes -->
+        <a href="/r/SA/shipping/nfp_8cxH5fVQz22FxSJvkdfHJCbp12mGKxuJ6e44" class="test-link">Test Microsite Route (SA/shipping)</a>
+        <a href="/r/AE/shipping/nfp_8cxH5fVQz22FxSJvkdfHJCbp12mGKxuJ6e44" class="test-link">Test Microsite Route (AE/shipping)</a>
+        
+        <!-- Test payment page routes -->
+        <a href="/pay/nfp_8cxH5fVQz22FxSJvkdfHJCbp12mGKxuJ6e44/recipient" class="test-link">Test Payment Recipient Page</a>
+        <a href="/pay/nfp_8cxH5fVQz22FxSJvkdfHJCbp12mGKxuJ6e44/details" class="test-link">Test Payment Details Page</a>
+        <a href="/pay/nfp_8cxH5fVQz22FxSJvkdfHJCbp12mGKxuJ6e44/card" class="test-link">Test Payment Card Page</a>
+        
+        <!-- Test with service parameter -->
+        <a href="/r/SA/shipping/nfp_8cxH5fVQz22FxSJvkdfHJCbp12mGKxuJ6e44?service=dhl" class="test-link">Test with DHL Service</a>
+        <a href="/r/SA/shipping/nfp_8cxH5fVQz22FxSJvkdfHJCbp12mGKxuJ6e44?service=fedex" class="test-link">Test with FedEx Service</a>
+        <a href="/r/SA/shipping/nfp_8cxH5fVQz22FxSJvkdfHJCbp12mGKxuJ6e44?service=smsa" class="test-link">Test with SMSA Service</a>
+    </div>
+
+    <div class="test-case">
+        <h3>Expected Behavior</h3>
+        <div class="meta-preview">
+            <h4>What Should Happen:</h4>
+            <p><strong>1. Database Query:</strong> The Netlify function should query the database for link ID "nfp_8cxH5fVQz22FxSJvkdfHJCbp12mGKxuJ6e44"</p>
+            <p><strong>2. Service Detection:</strong> Extract service information from the link payload</p>
+            <p><strong>3. Meta Tag Generation:</strong> Generate company-specific meta tags based on the service</p>
+            <p><strong>4. Image Selection:</strong> Use the appropriate OG image for the service (e.g., /og-dhl.jpg for DHL)</p>
+        </div>
+    </div>
+
+    <div class="test-case">
+        <h3>Debug Information</h3>
+        <div class="debug-info">
+            <p><strong>Link ID:</strong> nfp_8cxH5fVQz22FxSJvkdfHJCbp12mGKxuJ6e44</p>
+            <p><strong>Expected Database Query:</strong> SELECT * FROM links WHERE id = 'nfp_8cxH5fVQz22FxSJvkdfHJCbp12mGKxuJ6e44'</p>
+            <p><strong>Debug Logs to Check:</strong></p>
+            <ul>
+                <li>Link ID being processed</li>
+                <li>Link Data from database</li>
+                <li>Service key detection</li>
+                <li>Final meta tag values</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="test-case">
+        <h3>How to Test Sharing</h3>
+        <ol>
+            <li><strong>Click any test link above</strong> to see the meta tags in action</li>
+            <li><strong>Check page source</strong> to see the generated meta tags</li>
+            <li><strong>Test on social media platforms:</strong>
+                <ul>
+                    <li>Facebook Sharing Debugger: <a href="https://developers.facebook.com/tools/debug/" target="_blank">https://developers.facebook.com/tools/debug/</a></li>
+                    <li>Twitter Card Validator: <a href="https://cards-dev.twitter.com/validator" target="_blank">https://cards-dev.twitter.com/validator</a></li>
+                    <li>LinkedIn Post Inspector: <a href="https://www.linkedin.com/post-inspector/" target="_blank">https://www.linkedin.com/post-inspector/</a></li>
+                </ul>
+            </li>
+            <li><strong>Check Netlify function logs</strong> for debug information</li>
+        </ol>
+    </div>
+
+    <div class="test-case">
+        <h3>Expected Meta Tag Examples</h3>
+        <div class="meta-preview">
+            <h4>If the link is for DHL service:</h4>
+            <p><strong>Title:</strong> تتبع وتأكيد الدفع - دي إتش إل - DHL</p>
+            <p><strong>Description:</strong> شبكة شحن عالمية توفر خدمات التوصيل السريع الدولي والمحلي - تتبع شحنتك وأكمل الدفع بشكل آمن</p>
+            <p><strong>Image:</strong> /og-dhl.jpg</p>
+        </div>
+        
+        <div class="meta-preview">
+            <h4>If the link is for FedEx service:</h4>
+            <p><strong>Title:</strong> تتبع وتأكيد الدفع - فيديكس - FedEx</p>
+            <p><strong>Description:</strong> خدمات شحن دولية موثوقة مع تتبع فوري للشحنات - تتبع شحنتك وأكمل الدفع بشكل آمن</p>
+            <p><strong>Image:</strong> /og-fedex.jpg</p>
+        </div>
+    </div>
+</body>
+</html>

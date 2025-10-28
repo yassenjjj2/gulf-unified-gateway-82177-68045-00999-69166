@@ -10,7 +10,9 @@ interface PaymentMetaTagsProps {
 }
 
 const PaymentMetaTags = ({ serviceName, serviceKey, amount, title, description }: PaymentMetaTagsProps) => {
-  const branding = getServiceBranding(serviceKey || serviceName);
+  // Use serviceKey if provided, otherwise try to extract from serviceName
+  const actualServiceKey = serviceKey || serviceName?.toLowerCase() || 'aramex';
+  const branding = getServiceBranding(actualServiceKey);
   
   const ogTitle = title || `الدفع - ${serviceName}`;
   const serviceDescription = branding.description || `خدمة شحن موثوقة`;

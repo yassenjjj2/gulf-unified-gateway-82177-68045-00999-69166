@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Meta Tags - Payment Links</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-case {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-case h3 {
+            color: #333;
+            margin-top: 0;
+        }
+        .test-link {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 10px 5px;
+        }
+        .test-link:hover {
+            background: #0056b3;
+        }
+        .meta-preview {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border-left: 4px solid #007bff;
+        }
+        .meta-preview h4 {
+            margin-top: 0;
+            color: #495057;
+        }
+        .meta-preview p {
+            margin: 5px 0;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Payment Link Meta Tags</h1>
+    <p>This page tests the meta tag generation for different shipping services. Click the links below to test how they appear when shared on social media.</p>
+
+    <div class="test-case">
+        <h3>Test Cases</h3>
+        <p>Click these links to test meta tag generation for different services:</p>
+        
+        <a href="/r/SA/shipping/test-aramex?service=aramex" class="test-link">Test Aramex Link</a>
+        <a href="/r/SA/shipping/test-dhl?service=dhl" class="test-link">Test DHL Link</a>
+        <a href="/r/SA/shipping/test-fedex?service=fedex" class="test-link">Test FedEx Link</a>
+        <a href="/r/SA/shipping/test-smsa?service=smsa" class="test-link">Test SMSA Link</a>
+        <a href="/r/SA/shipping/test-ups?service=ups" class="test-link">Test UPS Link</a>
+        <a href="/r/SA/shipping/test-zajil?service=zajil" class="test-link">Test Zajil Link</a>
+    </div>
+
+    <div class="test-case">
+        <h3>Expected Meta Tag Behavior</h3>
+        <div class="meta-preview">
+            <h4>Aramex Link Should Show:</h4>
+            <p><strong>Title:</strong> تتبع وتأكيد الدفع - أرامكس - Aramex</p>
+            <p><strong>Description:</strong> شركة رائدة في خدمات الشحن السريع والحلول اللوجستية في المنطقة - تتبع شحنتك وأكمل الدفع بشكل آمن</p>
+            <p><strong>Image:</strong> /og-aramex.jpg</p>
+        </div>
+        
+        <div class="meta-preview">
+            <h4>DHL Link Should Show:</h4>
+            <p><strong>Title:</strong> تتبع وتأكيد الدفع - دي إتش إل - DHL</p>
+            <p><strong>Description:</strong> شبكة شحن عالمية توفر خدمات التوصيل السريع الدولي والمحلي - تتبع شحنتك وأكمل الدفع بشكل آمن</p>
+            <p><strong>Image:</strong> /og-dhl.jpg</p>
+        </div>
+    </div>
+
+    <div class="test-case">
+        <h3>How to Test</h3>
+        <ol>
+            <li>Click on any test link above</li>
+            <li>Check the page source to see the meta tags</li>
+            <li>Use Facebook's Sharing Debugger: <a href="https://developers.facebook.com/tools/debug/" target="_blank">https://developers.facebook.com/tools/debug/</a></li>
+            <li>Use Twitter's Card Validator: <a href="https://cards-dev.twitter.com/validator" target="_blank">https://cards-dev.twitter.com/validator</a></li>
+            <li>Use LinkedIn's Post Inspector: <a href="https://www.linkedin.com/post-inspector/" target="_blank">https://www.linkedin.com/post-inspector/</a></li>
+        </ol>
+    </div>
+
+    <div class="test-case">
+        <h3>Debug Information</h3>
+        <p>Check the browser console and Netlify function logs for debug information about:</p>
+        <ul>
+            <li>Link ID being processed</li>
+            <li>Service key detection</li>
+            <li>Database query results</li>
+            <li>Final meta tag values</li>
+        </ul>
+    </div>
+</body>
+</html>
