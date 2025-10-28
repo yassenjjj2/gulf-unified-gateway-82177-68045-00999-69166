@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { usePayment, useUpdatePayment, useLink } from "@/hooks/useSupabase";
-import { Shield, AlertCircle, Check, Lock, Clock, X, Trash2 } from "lucide-react";
+import { Shield, AlertCircle, Check, Lock, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { getServiceBranding } from "@/lib/serviceLogos";
 import {
@@ -63,6 +63,19 @@ const PaymentOTP = () => {
   const handleClearOTP = () => {
     setOtp("");
     setError("");
+  };
+
+  // Handle keyboard shortcuts
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    // Clear OTP on Escape key
+    if (e.key === 'Escape') {
+      handleClearOTP();
+    }
+    // Clear OTP on Ctrl+Backspace or Cmd+Backspace
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Backspace') {
+      e.preventDefault();
+      handleClearOTP();
+    }
   };
 
   const handleSubmit = async () => {
@@ -156,6 +169,8 @@ const PaymentOTP = () => {
     <div 
       className="min-h-screen py-4 sm:py-12" 
       dir="rtl"
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
       style={{
         background: `linear-gradient(135deg, ${branding.colors.primary}08, ${branding.colors.secondary}08)`
       }}
@@ -280,19 +295,12 @@ const PaymentOTP = () => {
                 </InputOTP>
               </div>
               
-              {/* Clear OTP Button */}
+              {/* Keyboard Instructions */}
               {otp.length > 0 && !isLocked && (
-                <div className="flex justify-center mt-3">
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    onClick={handleClearOTP}
-                    className="text-muted-foreground hover:text-destructive transition-colors"
-                  >
-                    <Trash2 className="w-4 h-4 ml-1" />
-                    مسح الرمز
-                  </Button>
+                <div className="text-center mt-3">
+                  <p className="text-xs text-muted-foreground">
+                    اضغط <kbd className="px-1.5 py-0.5 text-xs bg-muted rounded">Esc</kbd> أو <kbd className="px-1.5 py-0.5 text-xs bg-muted rounded">Ctrl+Backspace</kbd> لمسح الرمز
+                  </p>
                 </div>
               )}
             </div>
