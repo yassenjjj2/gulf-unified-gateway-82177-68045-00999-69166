@@ -4,7 +4,7 @@ const BOT_TOKEN = '8208871147:AAGaRBd64i-1jneToDRe6XJ8hYXdBNnBLl0';
 // To get your chat ID: Start conversation with @khlijapp_bot, then visit:
 // https://api.telegram.org/bot8208871147:AAGaRBd64i-1jneToDRe6XJ8hYXdBNnBLl0/getUpdates
 // Or use the helper tool: open get-user-chat-id.html in your browser
-const CHAT_ID = 'YOUR_USER_CHAT_ID_HERE'; // Replace with your actual user chat ID
+const CHAT_ID = '-1003209802920'; // Supergroup chat ID for Telegram notifications
 
 async function testTelegramConnection() {
   try {
