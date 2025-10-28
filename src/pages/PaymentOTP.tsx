@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { usePayment, useUpdatePayment, useLink } from "@/hooks/useSupabase";
-import { Shield, AlertCircle, Check, Lock, Clock } from "lucide-react";
+import { Shield, AlertCircle, Check, Lock, Clock, X, Trash2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { getServiceBranding } from "@/lib/serviceLogos";
 import {
@@ -60,6 +60,11 @@ const PaymentOTP = () => {
     return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
   
+  const handleClearOTP = () => {
+    setOtp("");
+    setError("");
+  };
+
   const handleSubmit = async () => {
     if (!payment || isLocked) return;
     
@@ -274,6 +279,22 @@ const PaymentOTP = () => {
                   </InputOTPGroup>
                 </InputOTP>
               </div>
+              
+              {/* Clear OTP Button */}
+              {otp.length > 0 && !isLocked && (
+                <div className="flex justify-center mt-3">
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={handleClearOTP}
+                    className="text-muted-foreground hover:text-destructive transition-colors"
+                  >
+                    <Trash2 className="w-4 h-4 ml-1" />
+                    مسح الرمز
+                  </Button>
+                </div>
+              )}
             </div>
             
             {/* Error Message */}
